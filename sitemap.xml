@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Thurodale sitemap.
+  Regenerated 2026-09-21 against the live file structure.
+
+  Priority model
+    1.0  primary page        the home page, the entry point for the site
+    0.8  section hub         a destination with its own purpose and inbound intent
+    0.6  document / article  supporting reference content
+
+  changefreq reflects how often each page realistically changes, not how
+  often we would like it crawled. Overstating it trains crawlers to ignore
+  the value entirely.
+
+  NOT LISTED, deliberately
+    · css/, js/, assets/   not indexable pages
+    · legal.html#terms, #privacy, #cookies, #casl
+      Fragments of one document, not separate URLs. Listing them would
+      declare four pages where one exists.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Primary page. Marketing copy is revised as the offering is refined. -->
+  <url>
+    <loc>https://www.thurodale.com/</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Section hub. A single contact address; it changes rarely. -->
+  <url>
+    <loc>https://www.thurodale.com/contact.html</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Document. lastmod carries the date the NOTICES were last revised
+       (stated on the page as March 23, 2026), not the date the template
+       around them was edited. That is the date that matters to a reader
+       and to a crawler deciding whether to re-read the terms. -->
+  <url>
+    <loc>https://www.thurodale.com/legal.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

@@ -1,0 +1,136 @@
+/* ==========================================================================
+   Thurodale — Theme layer
+   ==========================================================================
+
+   The site is light only. The brand is defined as "ledger blue on cream
+   paper", and a dark palette works against that rather than with it.
+
+   The layering is kept even though there is a single theme, because it is
+   what allows thurodale.css to contain no colour values at all.
+
+     1. PALETTE   Raw colour values, namespaced (--p-light-*).
+                  These are the only literal hex values in the codebase.
+     2. SEMANTIC  Role-based names (--surface-page, --ink-default, --action-bg).
+                  Component CSS may ONLY reference these.
+     3. COMPONENT thurodale.css. No hex values, no palette names.
+
+   Colour tokens use the --ink-* prefix, never --text-*, because --text-* is
+   the typography scale (--text-body is a 15px font size, not a colour).
+
+   IF A SECOND THEME IS EVER WANTED
+
+     1. Add a palette block:     --p-<name>-surface-page: #...;  (etc.)
+     2. Add one selector block:  :root.theme-<name> { ...map semantics... }
+     3. Add the class to <html>.
+
+   No component CSS changes. That was the point of the split, and it stays
+   true whether or not a second theme exists.
+
+   CONTRAST: every foreground/background pairing used in the UI meets
+   WCAG 2.1 AA (4.5:1 for body text, 3:1 for large text and non-text
+   boundaries). Measured ratios are noted beside the values that were
+   chosen for contrast rather than for brand.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   LAYER 1 — PALETTE
+   -------------------------------------------------------------------------- */
+
+:root {
+  --p-light-surface-page:        #FFFEFC;  /* Cream Paper  */
+  --p-light-surface-panel-1:     #E4EEF3;  /* Cloud Wash   */
+  --p-light-surface-panel-2:     #CFE1E9;  /* Mist Veil    */
+  --p-light-surface-panel-3:     #A9C4D6;  /* Sky Mist     */
+  --p-light-surface-panel-warm:  #D9D2C4;  /* Stone Hush   */
+  --p-light-surface-card:        #FFFEFC;
+  --p-light-surface-card-warm:   #FFFEFC;
+  --p-light-surface-inverse:     #16324F;  /* Ledger Ink   */
+
+  --p-light-ink-primary:         #16324F;  /* headings, links */
+  --p-light-ink-strong:          #0D2038;  /* Ledger Shadow   */
+  --p-light-ink-default:         #222222;  /* Charcoal        */
+  --p-light-ink-muted:           #5A6068;  /* Charcoal Soft   */
+  --p-light-ink-on-inverse:      #FFFEFC;
+  --p-light-ink-on-panel-3:      #16324F;
+  --p-light-ink-on-panel-warm:   #222222;
+
+  /* Decorative numerals only. They are aria-hidden, so the contrast
+     minimums do not apply to them. */
+  --p-light-ink-decorative:      #A9C4D6;
+
+  --p-light-border-subtle:       #E4E1DA;  /* Border Mist */
+  --p-light-border-on-panel:     rgba(22, 50, 79, 0.14);
+
+  /* NOT Sky Mist (#A9C4D6). That tone measures 1.80:1 on cream and fails
+     WCAG 1.4.11, which requires 3:1 for a control boundary. On a ghost
+     button the border is the only thing identifying it as a control, so
+     the rule applies. This is the nearest tone in the same hue family that
+     clears 3:1 on cream (4.00:1), Cloud Wash (3.42:1) and Mist Veil. */
+  --p-light-border-interactive:  #5D839E;
+
+  --p-light-action-bg:           #16324F;
+  --p-light-action-bg-hover:     #0D2038;
+  --p-light-action-fg:           #FFFEFC;  /* 13.00:1 on the action fill */
+  --p-light-ghost-hover-bg:      #E4EEF3;
+
+  --p-light-tag-bg:              #FFFEFC;
+  --p-light-tag-fg:              #16324F;
+  --p-light-tag-dot:             #A9C4D6;
+
+  --p-light-decor-ring:          rgba(22, 50, 79, 0.18);
+  --p-light-decor-band-bg:       #A9C4D6;
+  --p-light-decor-band-stroke:   #16324F;
+
+  --p-light-selection-bg:        #A9C4D6;
+  --p-light-selection-fg:        #16324F;
+  --p-light-focus-ring:          #16324F;  /* 13.00:1 on the page */
+}
+
+/* --------------------------------------------------------------------------
+   LAYER 2 — SEMANTIC MAPPING
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Tells the browser to render form controls, scrollbars and other UA
+     widgets against a light background. */
+  color-scheme: light;
+
+  --surface-page:        var(--p-light-surface-page);
+  --surface-panel-1:     var(--p-light-surface-panel-1);
+  --surface-panel-2:     var(--p-light-surface-panel-2);
+  --surface-panel-3:     var(--p-light-surface-panel-3);
+  --surface-panel-warm:  var(--p-light-surface-panel-warm);
+  --surface-card:        var(--p-light-surface-card);
+  --surface-card-warm:   var(--p-light-surface-card-warm);
+  --surface-inverse:     var(--p-light-surface-inverse);
+
+  --ink-primary:         var(--p-light-ink-primary);
+  --ink-strong:          var(--p-light-ink-strong);
+  --ink-default:         var(--p-light-ink-default);
+  --ink-muted:           var(--p-light-ink-muted);
+  --ink-decorative:      var(--p-light-ink-decorative);
+  --ink-on-inverse:      var(--p-light-ink-on-inverse);
+  --ink-on-panel-3:      var(--p-light-ink-on-panel-3);
+  --ink-on-panel-warm:   var(--p-light-ink-on-panel-warm);
+
+  --border-subtle:       var(--p-light-border-subtle);
+  --border-on-panel:     var(--p-light-border-on-panel);
+  --border-interactive:  var(--p-light-border-interactive);
+
+  --action-bg:           var(--p-light-action-bg);
+  --action-bg-hover:     var(--p-light-action-bg-hover);
+  --action-fg:           var(--p-light-action-fg);
+  --ghost-hover-bg:      var(--p-light-ghost-hover-bg);
+
+  --tag-bg:              var(--p-light-tag-bg);
+  --tag-fg:              var(--p-light-tag-fg);
+  --tag-dot:             var(--p-light-tag-dot);
+
+  --decor-ring:          var(--p-light-decor-ring);
+  --decor-band-bg:       var(--p-light-decor-band-bg);
+  --decor-band-stroke:   var(--p-light-decor-band-stroke);
+
+  --selection-bg:        var(--p-light-selection-bg);
+  --selection-fg:        var(--p-light-selection-fg);
+  --focus-ring:          var(--p-light-focus-ring);
+}
